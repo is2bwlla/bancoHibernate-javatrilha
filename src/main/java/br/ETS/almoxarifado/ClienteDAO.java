@@ -1,6 +1,7 @@
 package br.ETS.almoxarifado;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 public class ClienteDAO {
@@ -28,11 +29,16 @@ public class ClienteDAO {
 
     // Função que remove um cliente existente do banco desde de que tenha o saldo zerado atráves do remove
     public void remover(Cliente cliente) {
-        entityManager.getTransaction().begin();
-        cliente = entityManager.merge(cliente);
-        this.entityManager.remove(cliente);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            // Quando removemos o cliente, a conta associada será removida automaticamente
+            entityManager.remove(cliente);  // Remove o cliente (a conta será removida por cascata)
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
     public Cliente buscarPorCpf(String cpf) {

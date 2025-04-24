@@ -10,17 +10,33 @@ public class Main {
 
         ClienteDTO clienteDTO = new ClienteDTO("Igor Bedon de Sousa", "50050050055");
 
-        // CADASTRO NOVO USUÁRIO USANDO CLIENTSERVICE
-//        clienteService.cadastrarCliente(clienteDTO);
-//
+//        BANCO
+        ContaDAO contaDAO = new ContaDAO(entityManager);
+        ContaDTO contaDTO = new ContaDTO(2000.00, clienteDTO.nome());
 
-        // ATUALIZAÇÃO DE USUÁRIO SEM CLIENTSERVICE
+
+
+
+
+
+//        CLIENTE
+
+        // CADASTRO NOVO USUÁRIO USANDO CLIENTESERVICE
+//        clienteService.cadastrarCliente(clienteDTO);
+
+        // ATUALIZAÇÃO DE USUÁRIO SEM CLIENTESERVICE
 //        Cliente clienteExistente = clienteDAO.buscarPorCpf(clienteDTO.cpf());
 //        clienteExistente.setNome("Igor Bedon de Souza");
 //        clienteDAO.atualizar(clienteExistente);
 
-        // ATUALIZAÇÃO DE USUÁRIO COM CLIENTSERVICE
+        // ATUALIZAÇÃO DE USUÁRIO COM CLIENTESERVICE
 //        clienteService.atualizarCliente(clienteDTO);
+
+        // REMOÇÃO DO USUÁRIO SEM CLIENTESERVICE
+//        Cliente cliente = clienteDAO.buscarPorCpf(clienteDTO.cpf());
+//        clienteDAO.remover(cliente);
+
+        // REMOÇÃO DO USUÁRIO COM CLIENTESERVICE
 
     }
 }
